@@ -53,7 +53,7 @@ The availability of individual operations depends on the active mode, configured
 
 ## How it works
 
-\`\`\`mermaid
+```mermaid
 flowchart TB
     U["Authorised AI client"] <-->|"Approved MCP connection"| B["Apple Bridge v2<br/>52 MCP tools"]
     B --> L["LOCAL mode<br/>macOS user session"]
@@ -61,7 +61,7 @@ flowchart TB
     L --> M["Messages · Safari · Call history"]
     L --> H["Optional read-only<br/>SKS projection"]
     B -.-> C["Optional CLOUD mode<br/>supported Apple protocols"]
-\`\`\`
+```
 
 **Local-first, with clear boundaries.** In its primary configuration, the bridge uses the native macOS environment and permissions. The MCP server itself communicates over standard input/output; any remote connection is handled separately by an authorised, securely configured transport.
 
@@ -97,7 +97,7 @@ The public page is a showcase of an independently maintained integration. It is 
 
 Apple Bridge v2 builds upon the work of **Carlos Lorenzo**, creator of the upstream [MrGo2/icloud-mcp](https://github.com/MrGo2/icloud-mcp) project. The upstream project is published under the MIT licence. MK Universal Solutions Ltd has developed and integrated additional functionality for its own deployment.
 
-The upstream package and this private customised installation are **not interchangeable**. Installing \`mcp-icloud\` from npm does not install the private MKUS extensions.
+The upstream package and this private customised installation are **not interchangeable**. Installing `mcp-icloud` from npm does not install the private MKUS extensions.
 
 This project is **not affiliated with, endorsed by or an official product of Apple or OpenAI**. Apple, iCloud, iMessage, macOS and other trademarks remain the property of their respective owners.
 
