@@ -53,14 +53,14 @@ Specific actions depend on the connected client, software version, operating-sys
 
 ## Architecture: LOCAL vs CLOUD
 
-\`\`\`mermaid
+```mermaid
 flowchart TB
     Client["Authorised AI client"] --> L["Apple Bridge LOCAL"]
     Client --> C["Apple Bridge CLOUD"]
     L --> Mac["Approved macOS apps and local services"]
     C --> Remote["Selected IMAP / CalDAV / CardDAV services"]
-    Client -. "Optional, separately authorised" .-> Google["Native Gmail / Google Calendar integrations"]
-\`\`\`
+    Client -.->|Optional native connection| Google["Native Gmail / Google Calendar integrations"]
+```
 
 **LOCAL and CLOUD are separate, privately operated endpoints.** Neither is a public API. Native Google integrations, when connected in the AI client, are separate from both Apple Bridge servers. Cloud does not store or proxy Google account connections.
 
