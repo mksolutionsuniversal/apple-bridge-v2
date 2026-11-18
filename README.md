@@ -8,13 +8,13 @@
 
 <p>
   <img alt="Project status: operational private deployment" src="https://img.shields.io/badge/Status-Operational-18794e?style=for-the-badge" />
-  <img alt="53 registered MCP tools in LOCAL" src="https://img.shields.io/badge/LOCAL%20Tools-53-3066be?style=for-the-badge" />
+  <img alt="65 registered MCP tools in LOCAL" src="https://img.shields.io/badge/LOCAL%20Tools-65-3066be?style=for-the-badge" />
   <img alt="11 read-only tools in independent CLOUD" src="https://img.shields.io/badge/CLOUD%20Tools-11%20read--only-286c8e?style=for-the-badge" />
   <img alt="Latest verified basic diagnostics: 9 of 9 OK" src="https://img.shields.io/badge/Diagnostics-9%2F9%20OK-18794e?style=for-the-badge" />
   <img alt="Platform: macOS" src="https://img.shields.io/badge/Platform-macOS-343a40?style=for-the-badge" />
 </p>
 
-**[Overview](#overview) · [Capabilities](#what-it-can-do) · [Cloud](#independent-apple-bridge-cloud) · [Tool catalogue](#all-53-registered-mcp-tools) · [Architecture](#how-it-works) · [Security](#designed-with-control-in-mind) · [Status](#verified-operational-status)**
+**[Overview](#overview) · [Capabilities](#what-it-can-do) · [Cloud](#independent-apple-bridge-cloud) · [Tool catalogue](#capability-catalogue) · [Architecture](#how-it-works) · [Security](#designed-with-control-in-mind) · [Status](#verified-operational-status)**
 
 </div>
 
@@ -23,13 +23,25 @@
 > [!NOTE]
 > **This is the public project showcase, not a source-code distribution.** The production implementation, infrastructure configuration and development history are maintained in a separate private repository. This repository intentionally contains no live credentials, account mappings, private deployment details or personal data.
 
+## Three distinct roles
+
+This public repository is the **customer-facing Apple Bridge v2 showcase**. It presents the capabilities and security boundaries of the project, but contains **no production server code, downloadable release, account credentials or operational configuration**.
+
+| Component | Purpose | Access |
+|:--|:--|:--|
+| **Apple Bridge LOCAL** | macOS-native Apple services, including Messages, Notes, Reminders, Safari and optional SKS HealthKit projection | Separate private source and deployment |
+| **Apple Bridge CLOUD** | Independent Linux MCP for selected remote Mail, Calendar and Contacts sources; **read-only** | Separate private source and deployment |
+| **This public repository** | Product overview and general capability catalogue | Public showcase only |
+
+LOCAL and CLOUD use **different repositories, runtimes, credentials and MCP connections**. There is no automatic failover and neither implementation is distributed through this showcase.
+
 ## Overview
 
 **Apple Bridge v2** connects an authorised AI assistant with supported Apple services available to a macOS user. It brings together communication, organisation, account-aware discovery and selected local information in a single MCP interface.
 
-The project focuses on making Apple services **useful in real workflows**, not simply exposing a collection of commands. The primary, macOS-based **Apple Bridge LOCAL** deployment exposes **53 registered MCP tools**, including read-only diagnostics. The independent post-restart check on 10 November 2026 confirmed a working ChatGPT connection and **9/9 basic diagnostic checks OK**.
+The project focuses on making Apple services **useful in real workflows**, not simply exposing a collection of commands. The macOS-based **Apple Bridge LOCAL** production registry last reported **65 MCP tools** (17–18 November 2026), including SKS medication and health-history tools. Earlier post-restart connected-client acceptance confirmed **9/9 basic diagnostic checks OK**. Registered tools are not equivalent to 65/65 functionally tested operations.
 
-As of 11 November 2026, MK Universal Solutions Ltd also operates **Apple Bridge Cloud**, a **separate, read-only MCP deployment** with **11 registered tools**. It provides limited access to selected remote accounts when the Mac is unavailable. The two endpoints use separate connections and **do not automatically fail over**.
+As of 18 November 2026, MK Universal Solutions Ltd also operates **Apple Bridge Cloud**, a **separate, read-only MCP deployment** with **11 registered tools**. It provides read-only access to selected authorised remote accounts without depending on the Mac. The two endpoints use separate connections and **do not automatically fail over**.
 
 <details>
 <summary><strong>Why build it?</strong></summary>
@@ -54,7 +66,7 @@ Many daily activities are spread across Mail, Calendar, Contacts, Notes, Message
 | ❤️ **SKS PersonalHealth** | Read-only access to separately received local health projections, including available health status, samples and ECG metadata/data through defined tools |
 | 🩺 **Diagnostics** | Read-only checks of MCP registration, host, secure tunnel, local SKS service/projection and Messages bridge readiness |
 
-The availability of individual operations depends on the selected deployment, configured services, permissions and connected client. **The LOCAL catalogue of 53 tools and the separate Cloud catalogue of 11 tools are distinct; registration does not prove every possible functional scenario.**
+The availability of individual operations depends on the selected deployment, configured services, permissions and connected client. **The LOCAL registry of 65 tools and the separate Cloud catalogue of 11 tools are distinct; registration does not prove every possible functional scenario.**
 
 ## Highlights from the latest private build
 
@@ -74,9 +86,9 @@ The availability of individual operations depends on the selected deployment, co
 | Capability | Apple Bridge LOCAL | Apple Bridge Cloud |
 |:--|:--|:--|
 | Hosting | Authorised macOS computer | Independent Linux/Docker environment |
-| MCP tools | **53 registered** | **11 registered, read-only** |
+| MCP tools | **65 registered** | **11 registered, read-only** |
 | Mail | Supported local Mail functions, including authorised writes | Read/search selected iCloud and private IMAP mailboxes (**5 accounts**) |
-| Calendar | Supported local calendar functions, including authorised writes | Read-only selected iCloud calendars (**2 accounts**) |
+| Calendar | Supported local calendar functions, including authorised writes | Read-only selected iCloud calendars (**3 configured accounts**) |
 | Contacts | Supported local contacts functions, including authorised writes | Read-only selected iCloud contacts (**1 account**) |
 | Messages, Reminders, Notes, Safari, call history and SKS Health | LOCAL-specific capabilities | **Not available** |
 | Connection | Dedicated private MCP connection | Separate private MCP connection |
@@ -89,35 +101,19 @@ Google accounts are **intentionally not configured in Apple Bridge Cloud**. When
 
 The deployment is private and is not offered as a hosted public service. This public showcase intentionally omits source code, connection identifiers, account addresses, credentials, private network locations and operational recovery materials.
 
-## All 53 registered MCP tools
+## Capability catalogue
 
-The names below describe the **actual MCP tool interface** present in the private production build. They are published for transparency and discovery, **not as API access to the private server**. Tool execution depends on permissions, mode and the connected client's authorisation.
+The latest LOCAL registry contains **65 registered MCP tools** across Mail, Calendar, Contacts, Reminders, Notes, Messages, Safari, calls, people/account routing, diagnostics, and SKS PersonalHealth including medication and history features. Exact operations depend on macOS permissions, the connected client and available services.
 
-<details>
-<summary><strong>Show the full 53-tool catalogue by category</strong></summary>
+The independent Cloud interface contains **11 read-only tools**: `about`, `list-service-accounts`, `list-folders`, `list-emails`, `read-email`, `search-emails`, `list-calendars`, `list-events`, `list-contacts`, `search-contacts` and `read-contact`. Cloud does not provide message sending, data modification or LOCAL-only features.
 
-| Category | Tools | Registered MCP tool names |
-|:--|--:|:--|
-| Core & connection | 3 | `about`, `check-auth-status`, `set-mode` |
-| Mail | 6 | `list-emails`, `read-email`, `send-email`, `search-emails`, `mark-as-read`, `list-folders` |
-| Calendar | 5 | `list-events`, `create-event`, `update-event`, `delete-event`, `list-calendars` |
-| Contacts | 7 | `list-contacts`, `search-contacts`, `read-contact`, `create-contact`, `delete-contact`, `list-contact-accounts`, `list-contact-groups` |
-| Reminders | 7 | `list-reminder-lists`, `list-reminders`, `create-reminder`, `update-reminder`, `complete-reminder`, `delete-reminder`, `search-reminders` |
-| Notes | 5 | `list-note-folders`, `list-notes`, `read-note`, `create-note`, `search-notes` |
-| Messages | 4 | `list-chats`, `read-messages`, `send-message`, `react-message` |
-| Safari | 4 | `list-safari-tabs`, `get-current-safari-url`, `open-safari-url`, `close-safari-tab` |
-| People & account mapping | 7 | `set-person-alias`, `discover-person-accounts`, `list-service-accounts`, `list-person-accounts`, `set-person-account`, `remove-person-account`, `search-person-data` |
-| Call history | 1 | `search-calls` |
-| SKS PersonalHealth | 3 | `get-health-status`, `read-health-samples`, `read-health-ecg` |
-| Diagnostics | 1 | `diagnostics` |
-
-</details>
+The older 65-tool LOCAL catalogue was a historical snapshot, not the current complete registry. **Registration does not prove every action has undergone an individual functional test.** Implementation details, schemas and operational materials remain in the private development repositories.
 
 ## How it works
 
 ```mermaid
 flowchart TB
-    U["Authorised ChatGPT client"] <-->|"Private MCP connection A"| L["Apple Bridge LOCAL<br/>53 tools · macOS"]
+    U["Authorised ChatGPT client"] <-->|"Private MCP connection A"| L["Apple Bridge LOCAL<br/>65 registered tools · macOS"]
     U <-->|"Private MCP connection B"| C["Apple Bridge Cloud<br/>11 read-only tools · Linux"]
     L --> A["Local Apple services<br/>Messages · Notes · Reminders · Safari · SKS"]
     C --> B["Selected iCloud Mail, Calendar, Contacts<br/>and private IMAP mailboxes"]
@@ -143,11 +139,11 @@ Local-only operations depend on the Mac and are not exposed by the Cloud service
 
 ## Verified operational status
 
-**Apple Bridge LOCAL:** independent post-restart acceptance was completed on **10 November 2026 (UTC)**. The basic diagnostics and connected-client checks were also repeated successfully on 11 November before the Mac was intentionally switched off for a continuity test.
+**Apple Bridge LOCAL:** recorded post-restart connected-client acceptance was completed on **10–11 November 2026 (UTC)**, with the expanded 65-tool registry observed on 17–18 November. This is historical evidence, not continuous availability monitoring. The basic diagnostics and connected-client checks were also repeated successfully on 11 November before the Mac was intentionally switched off for a continuity test.
 
 | Check | Recorded result |
 |:--|:--|
-| Registered tools through ChatGPT | **53/53 available** |
+| Last observed LOCAL registry | **65 registered**, not 65/65 independently tested |
 | Read-only basic diagnostics | **9 OK, 0 warnings, 0 errors, 0 unknown** |
 | Server connection | ChatGPT Secure MCP Tunnel responded successfully |
 | Local SKS integration | Health endpoint and projection checks passed after restart |
@@ -155,7 +151,7 @@ Local-only operations depend on the Mac and are not exposed by the Cloud service
 
 **Scope of LOCAL verification:** `about` and `diagnostics(level="basic")` were invoked through the real connected client. This does not establish end-to-end correctness of every tool, that a Tapback reaction was delivered, or ongoing receipt of new health samples.
 
-**Apple Bridge Cloud:** a separate live acceptance on **11 November 2026** confirmed its own ChatGPT MCP connection, the **11-tool read-only interface**, the scoped **5 Mail / 2 Calendar / 1 Contacts** account configuration, working provider metadata reads and rejection of a removed Google Cloud account identifier. The local Mac was unavailable during the continuity checks. This does not imply an automatic failover mechanism or guarantee uninterrupted access to third-party providers.
+**Apple Bridge Cloud:** a separate production release and bounded client checks on **18 November 2026** confirmed its own MCP connection, an **11-tool read-only interface**, the scoped **5 Mail / 3 Calendar / 1 Contacts** service inventory, a bounded Calendar event lookup and correct rejection of an unauthorised service. The previous image was preserved privately for rollback. These are point-in-time checks, not a service-level availability guarantee.
 
 ## Project snapshot
 
@@ -165,7 +161,7 @@ Local-only operations depend on the Mac and are not exposed by the Cloud service
 | **Organisation** | MK Universal Solutions Ltd |
 | **Deployment** | Two private, independent endpoints: Apple Bridge LOCAL (macOS) and Apple Bridge Cloud (Linux) |
 | **Interface** | Model Context Protocol (MCP) |
-| **Current tool catalogue** | LOCAL: 53 registered tools; Cloud: 11 read-only tools |
+| **Current tool catalogue** | LOCAL: 65 registered tools; Cloud: 11 read-only tools |
 | **Primary approach** | Local-first, account-aware, permission-conscious |
 | **Public availability** | README-only project showcase; no production source, credentials or configuration published |
 
