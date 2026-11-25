@@ -17,7 +17,7 @@
 ---
 
 > [!IMPORTANT]
-> **This is a public project showcase, not the production source repository, a hosted service, or a downloadable release.** The two implementations and their operational documentation are maintained separately in private repositories. This page contains no production code, account identifiers, credentials, private connection details, or recovery materials.
+> **This is a public project showcase, not the production source repository, a hosted service, or a downloadable release.** The two implementations and their operational documentation are maintained in separate source repositories intended for private use. This page contains no production code, account identifiers, credentials, private connection details, or recovery materials.
 
 ## Overview
 
@@ -71,13 +71,13 @@ flowchart TB
 | **LOCAL** | **65 tools** | Mix of read operations and explicitly authorised actions |
 | **CLOUD** | **11 tools** | Read-only, exact account selection required |
 
-The LOCAL inventory includes SKS medication and health-history features introduced after the earlier 53-tool catalogue. Because the interface evolves, this public page intentionally provides the **capability overview rather than a stale, supposedly complete list of tool names**. In the operator's private environment, the current MCP registry remains the definitive tool inventory.
+The recorded LOCAL inventory includes SKS tools added after the earlier 53-tool catalogue. HealthKit history availability depends on a separately accepted deployment. Because the interface evolves, this public page intentionally provides the **capability overview rather than a stale, supposedly complete list of tool names**. In the operator's private environment, the current MCP registry remains the definitive tool inventory.
 
 ## Privacy and technical boundaries
 
 The project emphasises clear separation of responsibilities:
 
-- **Private source and private runtime:** this public repository contains presentation material only. LOCAL and CLOUD are maintained in distinct private repositories, with their own release and test histories.
+- **Private source and private runtime:** this public repository contains presentation material only. LOCAL and CLOUD are maintained in distinct source repositories intended for private use, with their own release and test histories.
 - **Explicit routing:** where supported, account IDs and service permissions determine the intended source. Similar-looking names or aliases do not constitute proof of identity or entitlement.
 - **Controlled writes:** CLOUD is read-only. LOCAL writes, sends and deletions require appropriate authorisation; uncertain message delivery is not blindly retried.
 - **Independent infrastructure:** CLOUD is a separate, restricted Linux runtime with its own credentials and connection. It does not expose LOCAL-only Messages, Safari, Notes, Reminders or health records.
@@ -87,21 +87,16 @@ The project emphasises clear separation of responsibilities:
 
 ## Verified operational status
 
-**Evidence snapshot: 18 November 2026 (UTC).**
-
 | Check | Recorded result |
 | :-- | :-- |
-| **LOCAL tool inventory** | 65 tools registered in the private production MCP roster on 17–18 November |
-| **LOCAL readiness** | Previous connected-client acceptance and basic diagnostics passed; the Mac-dependent endpoint may intentionally be offline |
-| **CLOUD tool inventory** | 11 read-only MCP tools |
-| **CLOUD authorised service counts** | 5 Mail / 3 Calendar / 1 Contacts in the recorded production configuration |
-| **CLOUD deployment** | Standalone Linux image deployed on 18 November; direct production acceptance and independent client tunnel checks passed |
-| **CLOUD boundary checks** | Authorised account reads worked and an unauthorised service request was rejected |
-| **Source quality checks** | Synthetic MCP tests, Linux image build and dependency advisory audit in the private Cloud CI |
+| **LOCAL · 17–18 November 2026** | 65 tools registered. Earlier connected-client acceptance and basic diagnostics passed. The Mac-dependent endpoint may intentionally be offline. |
+| **CLOUD 2.4.0 · 25 November 2026** | Deployment health and the existing secure client connection were verified. The installed ChatGPT plugin worked without reinstallation. |
+| **CLOUD tool and service inventory** | 11 read-only MCP tools. Authorised service counts were 5 Mail / 3 Calendar / 1 Contacts. |
+| **CLOUD read checks** | Sample Calendar event reads passed on all three accounts. Calendar discovery preserved all collections and their provider names and added component metadata. Sample Mail and Contacts reads passed. |
+| **CLOUD source checks for 2.4.0** | Synthetic MCP tests, Linux image build and dependency advisory audit passed. |
 
-The production Cloud acceptance included **25 successful bounded operations and two expected denials**. The client connection was subsequently verified independently. The last recorded dependency audit for the new Cloud lockfile reported no known vulnerabilities at **moderate severity or higher**; that is a point-in-time advisory result, not a certification of absolute security.
-
-The LOCAL tool count is a **registry measurement**, not a claim of 65/65 individually validated tool workflows. These dated observations should not be interpreted as a real-time availability promise.
+The LOCAL count describes registered tools. Each workflow requires its own validation.
+These are dated observations of privately operated systems.
 
 ## About this project
 
